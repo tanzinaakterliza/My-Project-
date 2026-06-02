@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — UU SwiftTransit</title>
+
+<style>
+:root{
+  --bg:#081536;
+  --glass: rgba(255,255,255,0.04);
+  --radius:12px;
+  --container:1100px;
+}
+
+/* Reset */
+*{margin:0; padding:0; box-sizing:border-box}
+
+/* BODY FIX — makes footer stay at bottom */
+body{
+  background:linear-gradient(180deg,#0d2343 , #0b469e);
+  color:#fcfeff;
+  font-family: Inter, sans-serif;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* LOGO */
+.logo-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    height: 42px;
+    width: auto;
+    filter: drop-shadow(0 0 1.5px rgba(255,255,255,0.5));
+}
+
+.brand-name {
+    font-size: 22px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* NAVBAR */
+.nav{
+  backdrop-filter: blur(6px);
+  position:sticky;
+  top:0;
+  z-index:60;
+  background:linear-gradient(180deg, rgba(38, 137, 184, 0.6), rgba(40, 66, 131, 0.35));
+  box-shadow:0 1px 0 #d8baba05;
+}
+
+.nav-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 0;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+}
+
+.brand-text{
+  font-size:20px;
+  font-weight:700;
+  color:#fff;
+}
+
+.nav-links{
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+
+.nav-links a{
+  color:white;
+  padding:8px 12px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:500;
+  transition:0.3s;
+}
+
+.nav-links a:hover{
+  background:rgba(255,255,255,0.05);
+}
+
+.nav-links a.active{
+  font-weight:700;
+  color:#efe62d;
+  background:rgba(255,255,255,0.1);
+}
+
+.nav-toggle{
+  display:none;
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:22px;
+  cursor:pointer;
+}
+
+/* HERO SECTION */
+.hero {
+    height: 300px;
+    background: url('assets/img/bg.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.hero h1 {
+    color: #fff;
+    font-size: 36px;
+    font-weight: 800;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+}
+.hero p {
+    color: #f0f0f0;
+    font-size: 20px;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+}
+
+/* ABOUT CONTENT */
+.content {
+    max-width: 900px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 35px 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    color:#0b2f5a;
+}
+.content h2 {
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.content p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+/* FEATURES */
+.features {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.feature {
+    flex: 1 1 calc(33% - 20px);
+    background: #f9fafb;
+    border-left: 4px solid #0b2f5a;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+.feature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+.feature h3 {
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+.feature p {
+    font-size: 14px;
+    color: #555;
+}
+
+/* TEAM SECTION */
+.contact-members {
+    max-width: 1000px;
+    margin: 60px auto;
+    text-align: center;
+}
+.contact-members h2 {
+    font-size: 32px;
+    color: #dce3ec;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+.member-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+.member-card {
+    background: #fff;
+    padding: 20px 15px;
+    border-radius: 15px;
+    width: 220px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    transition:0.3s;
+    color:#0b2f5a;
+}
+.member-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+}
+.member-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.fb-link {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #043b86;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+}
+.fb-link:hover {
+    background: #03275a;
+}
+
+/* FOOTER */
+footer{
+  margin-top:auto;
+  text-align:center;
+  padding:18px 0;
+  background:#0a3d62;
+  color:white;
+  font-size:14px;
+}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+  .nav-toggle{display:block}
+  .nav-links{
+    display:none;
+    position:absolute;
+    top:70px;
+    right:20px;
+    background:rgba(0,0,0,0.85);
+    padding:16px;
+    border-radius:12px;
+    flex-direction:column;
+    gap:10px;
+  }
+  .nav-links.show{display:flex}
+  .features {flex-direction: column;}
+  .feature {flex: 1 1 100%;}
+}
+</style>
+</head>
+
+<body>
+
+<header class="nav">
+    <div class="container nav-inner">
+      <a href="index.php" class="brand">
+        <div class="logo-box">
+        <br>  <img src="assets/img/uu-logo-transparent.png" class="logo">
+          <span class="brand-text">UU SwiftTransit</span>
+        </div>
+      </a>
+
+      <button class="nav-toggle">☰</button>
+
+      <nav class="nav-links">
+        <a href="index.php">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="signup.html">Sign Up</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div>
+        <h1>About UU SwiftTransit</h1>
+        <p>Making University Transportation Smarter & Reliable</p>
+    </div>
+</section>
+
+<section class="content">
+    <h2>UU Bus Tracking & Scheduling System</h2><hr><br>
+    <p>The UU Bus Tracking & Scheduling System is designed to help students and staff track buses, view schedules, and receive real-time updates.</p>
+    <p>It improves transportation efficiency, reduces waiting times, and provides admins with tools to manage routes, schedules, and drivers effectively.</p>
+
+    <div class="features">
+        <div class="feature">
+           <h3>Project Goals</h3>
+           <p>Provide real-time bus positions<br>Manage schedules easily<br>Assist drivers with updates</p>
+        </div>
+
+        <div class="feature">
+           <h3>Expected Deliverables</h3>
+           <p>Frontend UI<br>Database Design (ER Diagram)<br>Mock API (optional)</p>
+        </div>
+    </div>
+</section>
+
+<section class="contact-members">
+    <h2>Meet Our Team</h2>
+
+    <div class="member-grid">
+        <div class="member-card">
+          
+    <h3>Kanish Fatema</h3>
+    <a class="fb-link" href="https://github.com/kanishfatemakatha13-code" target="_blank">GitHub</a>
+
+
+</div>
+        <div class="member-card">
+            <h3>Tanzina Akter Liza</h3>
+            <a class="fb-link" href="https://github.com/tanzinaakterliza" target="_blank">GitHub</a>
+        </div>
+        <div class="member-card">
+            <h3>Tabassum Huda Nishat</h3>
+            <a class="fb-link" href="https://github.com/thnishat337-cell" target="_blank">GitHub</a>
+
+        </div>
+        <div class="member-card">
+            <h3>Israt Jahan Tonni</h3>
+            <a class="fb-link" href="https://github.com/tonnijahan820-cloud" target="_blank">GitHub</a>
+        </div>
+        <div class="member-card">
+            <h3>Sadia Tasnim</h3>
+           <a class="fb-link" href="https://github.com/SadiaTasnim-cloud" target="_blank">GitHub</a>
+
+        </div>
+   
+    </div>
+</section>
+
+<footer>
+  UU Bus Tracking & Scheduling System © 2025 | UU SwiftTransit
+</footer>
+
+<script>
+// Toggle mobile nav
+const navToggle = document.querySelector('.nav-toggle');
+const navLinks = document.querySelector('.nav-links');
+navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+});
+</script>
+
+</body>
+</html>

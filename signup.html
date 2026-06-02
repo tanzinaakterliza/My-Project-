@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up - UU SwiftTransit</title>
+
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#081536;
+  --radius:14px;
+  --container:1100px;
+  --primary:#068ceb;
+  --highlight:#ffe248;
+}
+
+/* RESET */
+*{margin:0; padding:0; box-sizing:border-box;}
+
+body {
+  font-family: 'Inter', sans-serif;
+  
+  /* 🔥 Background gradient */
+  background: linear-gradient(135deg, #78a9ed, #0457d3);
+  
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* dark overlay */
+body::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0, 9, 46, 0.6);
+  backdrop-filter:blur(2px);
+  z-index:-1;
+}
+
+/* NAVBAR */
+.nav{
+  backdrop-filter: blur(10px);
+  position:sticky; top:0; z-index:100;
+  background:rgba(3, 36, 126, 0.55);
+  box-shadow:0 2px 8px rgba(0,0,0,0.3);
+}
+.nav-inner{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:14px 0;
+  max-width:var(--container); margin:auto; width:90%;
+}
+.logo-box{
+  display:flex; align-items:center; gap:10px;
+}
+.logo{
+  height:42px; width:auto;
+}
+.brand-name{
+  font-size:24px;
+  font-weight:700;
+  color:white;
+}
+.brand { text-decoration:none !important; }
+
+/* NAV LINKS */
+.nav-links{
+  display:flex; gap:16px; align-items:center;
+}
+.nav-links a{
+  color:#eee;
+  padding:8px 14px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:500;
+  transition:0.3s;
+}
+.nav-links a:hover{
+  background:rgba(115, 153, 249, 0.12);
+}
+.nav-links a.active{
+  color:var(--highlight);
+  background:rgba(255,255,255,0.15);
+  font-weight:700;
+}
+
+/* MOBILE MENU BTN */
+.nav-toggle{
+  display:none;
+  font-size:26px;
+  background:none;
+  border:none;
+  color:white;
+}
+
+/* FORM WRAPPER */
+.signup-wrapper {
+  display:flex;
+  justify-content:center;
+  padding:90px 20px 50px;
+}
+
+/* SIGNUP FORM BOX */
+.login-container{
+  width:100%;
+  max-width:450px;
+  background:rgba(255,255,255,0.12);
+  padding:35px 28px;
+  border-radius:var(--radius);
+  backdrop-filter:blur(14px);
+  box-shadow:0 10px 35px rgba(0,0,0,0.25);
+  border:1px solid rgba(255,255,255,0.2);
+}
+
+.login-container h2{
+  text-align:center;
+  font-size:26px;
+  margin-bottom:12px;
+  color:#ffffff;
+  font-weight:700;
+}
+
+.muted{
+  font-size:14px;
+  text-align:center;
+  color:#d1d9e5;
+  margin-bottom:20px;
+}
+
+/* ROLE */
+.role {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px;
+}
+
+.role-row label.role {
+    display: inline-flex !important;
+    margin: 0 !important;
+}
+
+.role input {
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* LABELS */
+.login-container label{
+  display:block;
+  margin-bottom:6px;
+  margin-top:12px;
+  font-weight:600;
+  color:#e6eef7;
+}
+
+/* INPUTS */
+.login-container input{
+  width:100%;
+  padding:12px 14px;
+  border:none;
+  border-radius:8px;
+  background:#f2f5f9;
+  color:#333;
+  font-size:15px;
+  margin-bottom:10px;
+}
+
+.login-container input::placeholder{
+  color:#79889a;
+}
+
+/* BUTTON */
+.login-container button {
+  display:block;
+  width:80%;
+  margin:20px auto 0;
+  padding:12px;
+  background:var(--primary);
+  border:none;
+  color:white;
+  font-weight:600;
+  border-radius:9px;
+  cursor:pointer;
+  font-size:16px;
+  transition:0.3s;
+}
+.login-container button:hover {
+  background:#046bbd;
+}
+
+/* LINKS */
+.login-container p{
+  text-align:center;
+  margin-top:14px;
+  font-size:15px;
+}
+.login-container p a {
+  color:#00ff62;
+  text-decoration:none;
+  font-weight:600;
+}
+.login-container p a:hover {
+  color:#17ff82;
+  text-decoration:underline;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:12px 0;
+  margin-top:auto;
+  color:#fff;
+  font-size:14px;
+  background: rgba(4, 56, 134, 0.18);
+  backdrop-filter: blur(6px);
+}
+
+/* NOTIFICATION BOX */
+.notify-box{
+  position:fixed;
+  top:20px;
+  right:20px;
+  padding:14px 20px;
+  border-radius:8px;
+  color:white;
+  font-weight:600;
+  display:none;
+  animation: fadeSlide 0.4s ease;
+  z-index:9999;
+}
+.notify-success{ background:#00c853; }
+.notify-error{ background:#ff3d3d; }
+
+@keyframes fadeSlide{
+  from{opacity:0; transform:translateY(-10px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+  .nav-toggle{display:block;}
+  .nav-links{
+    display:none;
+    flex-direction:column;
+    position:absolute;
+    top:70px; right:20px;
+    background:rgba(0,0,0,0.9);
+    padding:18px;
+    border-radius:12px;
+    width:180px;
+  }
+  .nav-links.show{display:flex;}
+}
+</style>
+</head>
+
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.php" class="brand">
+      <div class="logo-box">
+        <img src="assets/img/uu-logo-transparent.png" class="logo" alt="UU Logo">
+        <span class="brand-name">UU SwiftTransit</span>
+      </div>
+    </a>
+
+    <button class="nav-toggle">☰</button>
+
+    <nav class="nav-links">
+      <a href="index.php">Home</a>
+      <a href="about.html">About</a>
+      <a href="signup.html" class="active">Sign Up</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="signup-wrapper">
+<div class="login-container">
+  <h2>Create an Account</h2>
+  <p class="muted">Choose a role and create your account to access the system.</p>
+
+  <label>Select Role</label>
+  <div class="role-row">
+    <label class="role">
+      <input type="radio" name="role" value="user" checked> Student / User
+    </label>
+    <label class="role">
+      <input type="radio" name="role" value="admin"> Admin
+    </label>
+    <label class="role">
+      <input type="radio" name="role" value="driver"> Driver
+    </label>
+  </div>
+
+  <label>Full Name</label>
+  <input id="name" type="text" placeholder="Your Name">
+
+  <label>Email Address</label>
+  <input id="email" type="email" placeholder="Email">
+
+  <label>Password</label>
+  <input id="pass" type="password" placeholder="Password">
+
+  <button id="signupBtn">Sign Up</button>
+
+  <p>Already registered?<br>
+  <a href="login.html">Login Here</a></p>
+</div>
+</div>
+
+<footer>
+  UU Bus Tracking & Scheduling System © 2025 | UU SwiftTransit
+</footer>
+
+<!-- NOTIFICATION BOX -->
+<div id="notify" class="notify-box"></div>
+
+<script>
+
+
+// SIGNUP VALIDATION
+// NAV TOGGLE
+const btn = document.querySelector(".nav-toggle");
+const links = document.querySelector(".nav-links");
+btn.onclick = ()=> links.classList.toggle("show");
+
+// NOTIFY FUNCTION
+function showNotify(type, message){
+  const box = document.getElementById("notify");
+  box.className = "notify-box " + (type === "success" ? "notify-success" : "notify-error");
+  box.innerText = message;
+  box.style.display = "block";
+  setTimeout(()=> box.style.display = "none", 2500);
+}
+
+// SIGNUP VALIDATION + BACKEND CONNECT
+document.getElementById("signupBtn").onclick = () => {
+  let name = document.getElementById("name").value.trim();
+  let email = document.getElementById("email").value.trim();
+  let pass = document.getElementById("pass").value.trim();
+  let role = document.querySelector("input[name='role']:checked").value;
+
+  if (!name || !email || !pass){
+    showNotify("error", "⚠️ Please fill all fields!");
+    return;
+  }
+
+  // SEND DATA TO BACKEND
+  let formData = new FormData();
+  formData.append("name", name);
+  formData.append("email", email);
+  formData.append("password", pass);
+  formData.append("role", role);
+  console.log(role);
+
+  fetch("signup.php", {
+      method: "POST",
+      body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+      if (data.status === "success") {
+          showNotify("success", "🎉 Account created successfully!");
+          setTimeout(()=> window.location.href = "login.html", 1200);
+      } else {
+          showNotify("error", data.message);
+      }
+  })
+  .catch(err => {
+      showNotify("error", "Server error!");
+      console.log(err);
+  });
+};
+</script>
+</body>
+</html>

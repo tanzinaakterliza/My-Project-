@@ -1,0 +1,257 @@
+/* ============================
+   UNIVERSAL BUS SYSTEM CSS
+   Admin + Driver + User
+   ============================ */
+
+/* Reset */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    display:flex;
+    min-height:100vh;
+    background:#f4f7fc;
+    color:#333;
+}
+/* Top Navbar */
+.topnav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 16px;
+  background: #0e3aaa;
+  color: #fff;
+  font-size: 22px;
+}
+
+.topnav button {
+  font-size: 28px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Sidebar hidden initially */
+
+/* ================= SIDEBAR ================= */
+.sidebar{
+    width:250px;
+    background:#0a3d62;
+    padding:20px;
+    color:white;
+    min-height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+}
+
+.sidebar h2{
+    margin-bottom:25px;
+    font-size:22px;
+}
+
+.sidebar a{
+    display:block;
+    padding:12px;
+    color:#dfeaff;
+    text-decoration:none;
+    font-size:16px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    transition:0.3s;
+}
+
+.sidebar a:hover,
+.sidebar a.active{
+    background:#2899ea;
+    border-radius:5px;
+    color:#fff;
+    font-weight:600;
+}
+
+/* Scrollbar */
+.sidebar::-webkit-scrollbar{
+    width:6px;
+}
+.sidebar::-webkit-scrollbar-thumb{
+    background:#777;
+    border-radius:3px;
+}
+
+/* ================= CONTENT ================= */
+.content{
+    margin-left:250px;   /* sidebar avoid */
+    flex:1;
+    padding:40px;
+    overflow-y:auto;
+}
+
+.content h1{
+    font-size:28px;
+    margin-bottom:10px;
+    color:#0a3d62;
+}
+
+.content p{
+    margin-bottom:20px;
+    color:#555;
+}
+
+/* ================= CARDS ================= */
+.cards{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap:25px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    text-align:center;
+    border-radius:10px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    transition:0.3s;
+    text-decoration:none;
+    color:#0a3d62;
+}
+
+.card:hover{
+    transform: translateY(-4px);
+    background:#eaf3ff;
+}
+
+/* ================= TABLE ================= */
+table{
+    width:100%;
+    margin-top:20px;
+    border-collapse:collapse;
+    background:white;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+table th{
+    background:#0a3d62;
+    color:white;
+    padding:12px;
+    font-size:16px;
+}
+
+table td{
+    padding:12px;
+    border-bottom: 1px solid #ddd;
+}
+
+table tr:hover{
+    background:#f1f7ff;
+}
+
+/* ================= BUTTONS ================= */
+button{
+    background:#0a3d62;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:15px;
+    transition:0.3s;
+    margin-top:10px;
+}
+
+button:hover{
+    background:#063556;
+}
+
+button.danger{
+    background:#d9534f;
+}
+button.danger:hover{
+    background:#b33632;
+}
+
+/* ================= FORM ================= */
+.form-box{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    margin-top:25px;
+    max-width:500px;
+}
+
+.form-box label{
+    margin-top:15px;
+    display:block;
+    color:#0a3d62;
+    font-weight:600;
+}
+
+.form-box input,
+.form-box select{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:15px;
+}
+
+.form-box button{
+    width:100%;
+    margin-top:20px;
+}
+
+/* ================= MAP BOX ================= */
+.map-box{
+    margin-top:20px;
+    height:300px;
+    background:#d7eaff;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#0a3d62;
+    font-weight:600;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* ================= FOOTER ================= */
+.footer{
+    margin-left:250px;
+    background:#0a3d62;
+    padding:18px;
+    text-align:center;
+    color:white;
+    font-size:14px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:850px){
+
+    body{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        position:relative;
+        min-height:auto;
+    }
+
+    .content{
+        margin-left:0;
+        padding:20px;
+    }
+
+    .footer{
+        margin-left:0;
+    }
+
+    .cards{
+        grid-template-columns: 1fr;
+    }
+}

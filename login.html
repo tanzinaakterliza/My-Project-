@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SwiftTransit | Login</title>
+
+<!-- SweetAlert2 CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<style>
+/* ===== FULL HEIGHT SETUP ===== */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* ===== BODY BACKGROUND ===== */
+body {
+    background: linear-gradient(135deg, #78a9ed, #0457d3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* ===== LOGIN CARD ===== */
+.login-container {
+    width: 360px;
+    max-width: 90%;
+    background: rgba(255,255,255,0.95);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(-10px);}
+    to {opacity:1; transform: translateY(0);}
+}
+
+/* ===== LOGO ===== */
+.logo-container {
+    margin-bottom: 20px;
+}
+
+.logo-container img {
+    height: 70px;
+    width: auto;
+}
+
+/* ===== ROLE SELECT ===== */
+#role {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* ===== FORMS ===== */
+.form { display: none; }
+.form.active { display: block; }
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background: #002f6c;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #001f4d;
+}
+
+/* ===== LINKS ===== */
+.signup-link {
+    margin-top: 12px;
+}
+
+.signup-link a {
+    font-weight: bold;
+    color: #002f6c;
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    width:100%;
+    text-align:center;
+    padding:12px 0;
+    background:#002f6c;
+    color:white;
+    font-size:14px;
+    position: absolute;
+    bottom: 0;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 12px;
+    background: #024aa3;   /* Normal blue */
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.btn-login:hover {
+    background: #013b86; /* Slightly darker on hover */
+}
+
+
+/* ===== MOBILE ===== */
+@media (max-width: 480px) {
+    .login-container {
+        width: 95%;
+        padding: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-container">
+    <div class="logo-container">
+        <!-- SVG LOGO: FAST LOADING -->
+        <img src="assets/img/uu-logo.svg" alt="UU Logo" loading="lazy">
+    </div>
+<p style="color: #024aa3;text-align: center;">Log in with your ID and password </p>
+    <select id="role">
+  <option value="">Select Role</option>
+  <option value="user">User</option>
+  <option value="admin">Admin</option>
+  <option value="driver">Driver</option>
+</select>
+
+<input type="text" id="user-id" placeholder="User Email">
+<input type="password" id="user-password" placeholder="Password">
+
+<input type="text" id="admin-id" placeholder="Admin Email" style="display:none;">
+<input type="password" id="admin-password" placeholder="Password" style="display:none;">
+
+<input type="text" id="driver-id" placeholder="Driver Email" style="display:none;">
+<input type="password" id="driver-password" placeholder="Password" style="display:none;">
+
+<button class="btn-login" onclick="login()">Login</button>
+
+
+<script>
+function updateFields() {
+    let role = document.getElementById("role").value;
+    document.querySelectorAll("input[type=text], input[type=password]").forEach(i => i.style.display = "none");
+
+    if (role === "user") {
+        document.getElementById("user-id").style.display = "block";
+        document.getElementById("user-password").style.display = "block";
+    } else if (role === "admin") {
+        document.getElementById("admin-id").style.display = "block";
+        document.getElementById("admin-password").style.display = "block";
+    } else if (role === "driver") {
+        document.getElementById("driver-id").style.display = "block";
+        document.getElementById("driver-password").style.display = "block";
+    }
+}
+
+// Bind onchange
+document.getElementById("role").onchange = updateFields;
+
+function login() {
+    let role = document.getElementById("role").value;
+    if (!role) { 
+        alert("Select a role!"); 
+        return; 
+    }
+
+    let email = document.getElementById(role + "-id").value;
+    let password = document.getElementById(role + "-password").value;
+
+    if (!email || !password) { 
+        alert("All fields required!"); 
+        return; 
+    }
+
+    let formData = new FormData();
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("role", role);
+
+    fetch("login.php",{method:"POST",body:formData})
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+        if(data.status === "success"){
+            Swal.fire({
+                icon: 'success',
+                title: 'Login Successful!',
+                text: 'Redirecting...',
+                showConfirmButton: false,
+                timer: 1200
+            });
+
+                let role = data.role.toLowerCase();
+                if(role === "user") window.location.href = "user/dashboard.php";
+                else if(role === "admin") window.location.href = "admin/dashboard.php";
+                else if(role === "driver") window.location.href = "driver/dashboard.php";
+
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Login Failed!',
+                text: data.message || "Invalid credentials"
+            });
+        }
+    })
+    .catch(err => {
+        console.error("Fetch error:", err);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: 'Something went wrong. Please try again.'
+        });
+    });
+}
+</script>
+
+</div>
+</body>
+</html>

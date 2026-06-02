@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Driver test sender</title></head>
+<body>
+<h3>Send location (test)</h3>
+Bus id: <input id="bus" value="UU-120"><br>
+Driver id: <input id="driver" value="Driver-201"><br>
+<button id="send">Send current location</button>
+<pre id="log"></pre>
+
+<script>
+const TOKEN = 'SOME_SHARED_SECRET_TOKEN'; // same as driver_update.php
+
+document.getElementById('send').addEventListener('click', () => {
+    if(!navigator.geolocation) return log('Geolocation not supported');
+    navigator.geolocation.getCurrentPosition(function(pos){
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        sendLocation(lat, lng);
+    }, function(err){
+        log('Error: ' + err.message);
+    }, {
+        enableHighAccuracy: true
+    });
+});
+
+function sendLocation(lat, lng){
+    const bus = document.getElementById('bus').value;
+    const driver = document.getElementById('driver').value;
+    fetch('user/driver_update.php', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            token: TOKEN,
+            bus_id: bus,
+            driver_id: driver,
+            lat: lat,
+            lng: lng,
+            speed: 0
+        })
+    }).then(r => r.json()).then(d => {
+        log(JSON.stringify(d, null, 2));
+    }).catch(e => log('Send error: ' + e));
+}
+
+function log(msg){
+    document.getElementById('log').textContent += msg + "\n";
+}
+</script>
+</body>
+</html>

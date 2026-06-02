@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — UU SwiftTransit</title>
+
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --container:1100px;
+  --radius:12px;
+  --primary:#57ef57;
+  --glass: rgba(255,255,255,0.05);
+}
+
+/* RESET */
+*{margin:0; padding:0; box-sizing:border-box;}
+body{
+  font-family:'Inter',sans-serif;
+  background: linear-gradient(180deg,#031839 , #2f64b3);
+  min-height:100vh;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+}
+.brand {
+  text-decoration: none !important;
+}
+
+.brand:hover, 
+.brand:focus,
+.brand-name {
+  text-decoration: none !important;
+}
+
+/* NAVBAR */
+.nav{
+  backdrop-filter: blur(6px);
+  position:sticky; top:0; z-index:60;
+  background:linear-gradient(180deg, rgba(38, 137, 184, 0.6), rgba(40, 66, 131, 0.35));
+  padding:14px 20px;
+}
+.nav-inner{
+  display:flex; justify-content:space-between; align-items:center;
+  max-width:var(--container); margin:auto; width:95%;
+}
+.logo-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.logo {
+    height: 42px;
+    width: auto;
+    filter: drop-shadow(0 0 1.5px rgba(255,255,255,0.5));
+}
+.brand-text{
+  font-size:22px;
+  font-weight:700;
+  color:#fff;
+}
+.nav-links{
+  display:flex; gap:14px; align-items:center;
+}
+.nav-links a{
+  color:#eee; padding:8px 12px; border-radius:8px;
+  text-decoration:none; font-weight:500; transition:0.3s;
+}
+.nav-links a:hover{
+  background:rgba(255,255,255,0.15);
+}
+.nav-links a.active{
+  color:#eed410;
+  background:rgba(255,255,255,0.1);
+}
+.nav-toggle{
+  display:none;
+  font-size:24px;
+  color:white;
+  background:none;
+  border:none;
+  cursor:pointer;
+}
+
+/* MAIN CONTAINER */
+.main-container{
+  max-width:var(--container);
+  margin:60px auto 50px auto;
+  padding:0 15px;
+}
+
+/* INFO SECTION */
+.info-section{
+  background: var(--glass);
+  backdrop-filter: blur(8px);
+  padding:30px 25px;
+  border-radius:var(--radius);
+  box-shadow:0 8px 25px rgba(0,0,0,0.3);
+  margin-bottom:40px;
+  color:#fff;
+}
+.info-section h2{
+  color:var(--primary);
+  margin-bottom:15px;
+}
+.info-section h3{
+  color:var(--primary);
+  margin:12px 0 6px 0;
+}
+.info-section p{
+  line-height:1.5;
+  margin-bottom:10px;
+}
+
+/* FORM SECTION */
+.form-card{
+  max-width:500px;
+  background: var(--glass);
+  backdrop-filter: blur(8px);
+  padding:35px 25px;
+  border-radius:var(--radius);
+  box-shadow:0 8px 25px rgba(0,0,0,0.3);
+  margin:auto;
+  color:#fff;
+}
+.form-card h1{
+  font-size:28px;
+  font-weight:700;
+  text-align:center;
+  margin-bottom:15px;
+  color:var(--primary);
+}
+.form-card p{
+  text-align:center;
+  margin-bottom:25px;
+  color:#eee;
+}
+.form-card input,
+.form-card textarea{
+  width:100%;
+  padding:12px 14px;
+  margin-bottom:15px;
+  border:none;
+  border-radius:8px;
+  font-size:14px;
+  background: rgba(255,255,255,0.1);
+  color:#fff;
+}
+.form-card input::placeholder,
+.form-card textarea::placeholder{
+  color:#ddd;
+}
+.form-card button{
+  display:block;
+  width:60%;
+  margin:15px auto 0 auto;
+  padding:12px;
+  background:var(--primary);
+  border:none;
+  color:#fff;
+  font-weight:600;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:15px;
+  transition:0.3s;
+}
+.form-card button:hover{
+  background:#50aefa;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  margin-top:auto;
+  padding:15px 0;
+  color:#fff;
+  font-size:14px;
+  background: rgba(0,0,0,0.18);
+  backdrop-filter: blur(6px);
+}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+  .nav-toggle{
+    display:block;
+  }
+  .nav-links{
+    display:none; 
+    flex-direction:column; 
+    position:absolute;
+    top:70px; right:20px; 
+    background:rgba(0,0,0,0.88);
+    padding:18px; 
+    border-radius:12px;
+  }
+  .nav-links.show{display:flex;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="nav">
+  <div class="nav-inner">
+   <a href="index.php" class="brand">
+        <div class="logo-box">
+          <img src="assets/img/uu-logo-transparent.png" class="logo">
+          <span class="brand-text">UU SwiftTransit</span>
+        </div>
+      </a>
+    <button class="nav-toggle">☰</button>
+    <nav class="nav-links">
+      <a href="index.php">Home</a>
+      <a href="about.html">About</a>
+      <a href="signup.html">Sign Up</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<div class="main-container">
+
+  <!-- INFO SECTION -->
+  <section class="info-section">
+    <h2>Why Contact Us?</h2>
+    <p>We are here to help students, drivers, and admins for any issues related to the University Bus Tracking & Scheduling System. Your feedback is valuable and helps us improve the service.</p>
+    <hr style="border:none; border-top:1px solid rgba(255,255,255,0.2); margin:20px 0;">
+    <h3>Support Hours</h3>
+    <p>Mon - Fri: 9:00 AM - 6:00 PM <br> Sat: 10:00 AM - 2:00 PM</p>
+    <h3>Contact Info</h3>
+    <p>Email: support@uuswifttransit.com <br> Phone: +880123456789</p>
+  </section>
+
+ <!-- CONTACT FORM -->
+<section class="form-card">
+  <h1>Contact Us</h1>
+  <p>Send us a message about the project or any questions.</p>
+  <form id="contactForm" method="POST" action="php/contact_submit.php" onsubmit="return handleContact(event)">
+    <input type="text" name="name" placeholder="Full Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="tel" name="phone" placeholder="Phone (optional)">
+    <textarea name="message" rows="5" placeholder="Your message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+  <div id="formMsg" style="margin-top:15px; font-weight:bold;"></div>
+</section>
+
+<script>
+// Mobile nav toggle
+const btn = document.querySelector(".nav-toggle");
+const links = document.querySelector(".nav-links");
+btn.onclick = ()=> links.classList.toggle("show");
+
+// Form submission with backend
+function handleContact(e){
+  e.preventDefault();
+  const form = e.target;
+  const formMsg = document.getElementById("formMsg");
+  const data = new FormData(form);
+
+  fetch(form.action, {
+    method:'POST',
+    body: data
+  })
+  .then(res => res.json())
+  .then(res => {
+    if(res.status === 'success'){
+      formMsg.style.color = 'lightgreen';
+      formMsg.textContent = "Message sent successfully!";
+      form.reset();
+    } else {
+      formMsg.style.color = 'red';
+      formMsg.textContent = "Error: " + res.error;
+    }
+  })
+  .catch(err => {
+    formMsg.style.color = 'red';
+    formMsg.textContent = "Error sending message!";
+  });
+
+  return false;
+}
+</script>
+</div>
+</body>
+</html>
